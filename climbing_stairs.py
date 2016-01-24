@@ -36,7 +36,7 @@ class Solution:
             if self.caches.has_key(n-2):
                 n_2 = self.caches[n-2]
             else:
-                n_2 = self.caches[n-2]
+                n_2 = self.climbStairs[n-2]
             self.caches[n] = n_1 + n_2
         return self.caches[n]
 
