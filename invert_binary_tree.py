@@ -21,6 +21,13 @@ class TreeNode:
         self.val = val
         self.left, self.right = None, None
 
+    def __repr__(self):
+        #use preorder way to traverse the tree
+        from bin_tree_preorder_traversal import RecursiveSolution
+        recursivePreorderTraversal = RecursiveSolution()
+        nodes = recursivePreorderTraversal.preorderTraversal(self)
+        return "先序遍历:" + str(nodes)
+
 class Solution:
     """
     use a loop to invert tree
@@ -28,8 +35,6 @@ class Solution:
     # @param root: a TreeNode, the root of the binary tree
     # @return: nothing
     def invertBinaryTree(self, root):
-        #save the root node of tree
-        tree = root
         #the right child nodes
         rightnodes = []
         while root != None:
@@ -47,8 +52,7 @@ class Solution:
                     #continue the loop
                     root = rightnodes.pop()
                 else:
-                    #restore the root node of tree and end the loop
-                    root = tree
+                    #end the loop
                     break
 
 class RecursiveSolution:
@@ -67,7 +71,17 @@ class RecursiveSolution:
                     self.invertBinaryTree(root.right)
 
 def main():
-    
+    tree = TreeNode(1)
+    tree.left = TreeNode(2)
+    tree.right = TreeNode(3)
+    tree.right.left = TreeNode(4)
+    print "反转前二叉树=>\n", tree
+    solution = Solution()
+    solution.invertBinaryTree(tree)
+    print "使用循环反转后的二叉树=>\n", tree
+    solution = RecursiveSolution()
+    solution.invertBinaryTree(tree)
+    print "使用递归再次反转后的二叉树=>\n", tree
 
 if __name__ == '__main__':
     main()
