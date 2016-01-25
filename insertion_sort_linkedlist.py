@@ -33,6 +33,67 @@ class Solution:
     """
     @param head: The first node of linked list.
     @return: The head of linked list.
+
+    NOTE:performace test result:
+        =============================
+        | length | execution time(s)|
+        -----------------------------
+        | 1000   | 0.039391040802   |
+        -----------------------------
+        | 2000   | 0.154845952988   |
+        -----------------------------
+        | 4000   | 0.621329069138   |
+        -----------------------------
+        | 8000   | 2.49966096878    |
+        -----------------------------
+        | 10000  | 3.73059010506    |
+        -----------------------------
+    """
+    def insertionSortList(self, head):
+        array = []
+        linkedlist = head
+        while True:
+            #It is more faster that sorting a simple array object than the ListNode object
+            if head != None:
+                array.append(head.val)
+                head = head.next
+            else:
+                break
+        if len(array) == 0:
+            return None
+        elif len(array) == 1:
+            return linkedlist
+        else:
+            #the elements need to sort
+            for i in range(1,len(array)):
+                temp = array[i]
+                #the elements have been sorted
+                for j in range(i-1,-1,-1):
+                    if temp < array[j]:
+                        #move elements
+                        array[j+1] = array[j]
+                    else:
+                        #IMPORTANT:don't forget to update value of j
+                        j += 1
+                        break
+                #insertion
+                array[j] = temp
+            head = linkedlist
+            i = 0
+            while True:
+                #use the sorted array to update the ListNode object
+                if head != None:
+                    head.val = array[i]
+                    head = head.next
+                    i += 1
+                else:
+                    break
+            return linkedlist
+
+class AnotherSolution:
+    """
+    @param head: The first node of linked list.
+    @return: The head of linked list.
     
     NOTE:performace test result:
         =============================
