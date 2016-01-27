@@ -15,6 +15,29 @@ flip_bits.py
 Created by <jimokanghanchao@gmail.com> on Jan 24,2016
 """
 
+class BetterSolution:
+    """
+    参考:http://blog.csdn.net/wutingyehe/article/details/46635767
+
+    xor_ab = a ^ b
+    如果xor_ab是负数，那么求解负数(补码)中1的个数等价于:
+        xor_ab ^= -2**31(32位整数中的最小的负数,其补码为:10000000000000000000000000000000),
+    xor_ab 此时除了符号位变成了0，其它位不变，所以xor_ab这个正数二进制中1的个数 + 1(负数符号位),
+    就是负数二进制中1的个数
+    求一个正数a的二进制1的个数除了使用bin和count函数，可以使用:
+    while a > 0:
+        counter += a % 2
+        a /= 2
+    
+    综上:
+    0:      00000000000000000000000000000000
+    -1:     11111111111111111111111111111111
+    -2**31: 10000000000000000000000000000000
+    2**31-1:01111111111111111111111111111111
+    使用这几个数，配合^ | &进行位运算，可以简化计算
+    """
+    pass
+
 class Solution:
     """
     use xor result of a, b to calculate.
