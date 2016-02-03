@@ -16,6 +16,8 @@ class RandomOrgApi:
         self.ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36'
 
     def __getattr__(self, attr):
+        if "_" in attr:
+            attr = attr.replace("_","-")
         self.path = attr + '/'
         return self
 
@@ -31,8 +33,17 @@ class RandomOrgApi:
         req.add_header('User-Agent',self.ua)
         res = urllib2.urlopen(req)
         if res.code == 200:
-            array = res.read().split("\n")
-            return [int(s) for s in array[:-1]]
+            result = res.read()
+            if "\n" in result:
+                array = result.split("\n")
+                array = array[:-1]
+                if "," in result:
+                    array = array[0].split(",")
+                elif " " in result:
+                    array = array[0].split(" ")
+                return [int(s) for s in array]
+            else:
+                raise Exception("not implemented in this case")
         else:
             return None
 
