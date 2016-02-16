@@ -17,7 +17,7 @@ Created by <jimokanghanchao@gmail.com> on Feb 16,2016
 class Solution:
     """
     使用经典的二分法搜索插入的位置。
-    1.初始化插入位置在数组的中间(length/2)
+    1.初始化插入位置在数组的中间(length/2)，在这里使用length/2比(length-1)/2更容易处理插入位置的边界情况。
     
     2.和中间数判断大小关系并循环进行二分查找，如果相等，结束查找。如果子数组元素个数小于2，结束查找。
       中间数middle = array[length/2]
@@ -62,7 +62,6 @@ class Solution:
                 else:
                     if position == None:
                         return 0
-                    break
             return position
         if target <= origin[position]:
             return position
